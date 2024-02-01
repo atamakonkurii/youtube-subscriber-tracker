@@ -1,0 +1,8 @@
+.DS_Store
+
+*.tfstate
+*.tfstate.*
+*.tfvars
+
+terraform/.terraform/
+lambda/lambda_function.zip
