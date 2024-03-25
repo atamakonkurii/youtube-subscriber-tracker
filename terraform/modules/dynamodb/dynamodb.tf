@@ -8,7 +8,7 @@ resource "aws_dynamodb_table" "youtube-subscriber-dynamodb-table" {
     name = "YoutubeChannelId"
     type = "S"
   }
-  
+
   attribute {
     name = "SubscriberCount"
     type = "N"
