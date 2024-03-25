@@ -1,12 +1,14 @@
 import json
 import urllib.request
 
-import secret_manager_utils
-import dynamodb_utils
+from secret_manager_utils import SecretManagerUtils
+from dynamodb_utils import DynamoDBUtils
 
 def lambda_handler(event, context):
-    secret_manager_youtube_api = secret_manager_utils.SecretManagerUtils("YOUTUBE_API_KEY", "ap-northeast-1")
-    secret_manager_youtube_channel = secret_manager_utils.SecretManagerUtils("YOUTUBE_CHANNEL_ID", "ap-northeast-1")
+    region = "ap-northeast-1"
+    secret_manager_youtube_api = SecretManagerUtils("YOUTUBE_API_KEY", region)
+    secret_manager_youtube_channel = SecretManagerUtils("YOUTUBE_CHANNEL_ID", region)
+    
     api_key = secret_manager_youtube_api._get_secret()
     channel_id = secret_manager_youtube_channel._get_secret()
     url = f"https://www.googleapis.com/youtube/v3/channels?part=statistics&id={channel_id}&key={api_key}"
@@ -16,7 +18,7 @@ def lambda_handler(event, context):
         subscriber_count_string = data['items'][0]['statistics']['subscriberCount']
         subscriber_count = int(subscriber_count_string)
 
-        dynamodb = dynamodb_utils.DynamoDBUtils("youtube-subscriber-dynamodb-table", channel_id)
+        dynamodb = DynamoDBUtils("youtube-subscriber-dynamodb-table", channel_id)
 
         previous_subscriber_count = dynamodb._get_latest_record()
 
