@@ -33,9 +33,39 @@ resource "aws_iam_policy" "secret_manager_policy" {
   })
 }
 
+resource "aws_iam_policy" "lambda_dynamodb_access" {
+  name        = "lambda_dynamodb_access"
+  description = "Allow lambda function to access DynamoDB"
+
+  policy = <<EOF
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "dynamodb:GetItem",
+        "dynamodb:PutItem",
+        "dynamodb:UpdateItem",
+        "dynamodb:DeleteItem",
+        "dynamodb:Scan",
+        "dynamodb:Query"
+      ],
+      "Resource": "arn:aws:dynamodb:${var.aws_region}:${var.aws_account_id}:table/youtube-subscriber-dynamodb-table"
+    }
+  ]
+}
+EOF
+}
+
 resource "aws_iam_role_policy_attachment" "secret_manager_attachment" {
   role       = aws_iam_role.lambda_role.name
   policy_arn = aws_iam_policy.secret_manager_policy.arn
+}
+
+resource "aws_iam_role_policy_attachment" "lambda_dynamodb_attach" {
+  role       = aws_iam_role.lambda_role.name
+  policy_arn = aws_iam_policy.lambda_dynamodb_access.arn
 }
 
 output "lambda_role_arn" {

@@ -3,8 +3,8 @@ variable "lambda_function_name" {
   type        = string
 }
 
-variable "lambda_role_arn" {
-  description = "Lambda role ARN"
+variable "lambda_arn" {
+  description = "Lambda ARN"
   type        = string
   
 }
@@ -16,7 +16,7 @@ resource "aws_cloudwatch_event_rule" "every_day" {
 
 resource "aws_cloudwatch_event_target" "lambda" {
   rule = aws_cloudwatch_event_rule.every_day.name
-  arn  = var.lambda_role_arn
+  arn  = var.lambda_arn
 }
 
 resource "aws_lambda_permission" "allow_cloudwatch_to_call_lambda" {

@@ -16,5 +16,9 @@ module "lambda" {
 module "cloudwatch" {
   source = "./modules/cloudwatch"
   lambda_function_name = module.lambda.lambda_function_name
-  lambda_role_arn = module.lambda.lambda_role_arn
+  lambda_arn = module.lambda.lambda_arn
+}
+
+module "dynamodb" {
+  source = "./modules/dynamodb"
 }

@@ -12,6 +12,12 @@ def lambda_handler(event, context):
         data = json.loads(response.read().decode())
         subscriber_count = data['items'][0]['statistics']['subscriberCount']
 
+        item = {
+            'YoutubeChannelId': channel_id,
+            'SubscriberCount': int(subscriber_count)
+        }
+        __put_item(item)
+
     return {
         'statusCode': 200,
         'body': json.dumps(f"Subscriber count: {subscriber_count}")
@@ -39,3 +45,9 @@ def __get_secret(secret_name):
     secret = get_secret_value_response['SecretString']
 
     return secret
+
+# dynamodbにデータを保存する関数
+def __put_item(item):
+    dynamodb = boto3.resource('dynamodb')
+    table = dynamodb.Table('youtube-subscriber-dynamodb-table')
+    table.put_item(Item=item)
