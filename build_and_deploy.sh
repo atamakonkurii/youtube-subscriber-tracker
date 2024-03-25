@@ -1,8 +1,7 @@
 # Lambda関数のビルド
-cd lambda
+cd terraform/modules/lambda/src
 zip -r ./lambda_function.zip .
-zip -g lambda_function.zip lambda_function.py
-cd ..
+cd ../../../../
 
 # Terraformを使ったデプロイ
 cd terraform
