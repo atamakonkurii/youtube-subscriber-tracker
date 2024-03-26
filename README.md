@@ -34,7 +34,7 @@ aws_topic_name = "xxx"
 ```
 
 ##### ⭐️(※必要に応じて)modules/lambda/src/constants.pyの編集
-* CHANNEL_IDを見たいチャンネルのIDを設定するとか
+* `CHANNEL_ID`を見たいチャンネルのIDを設定するとか
 
 ##### ⭐️terraformでのビルドとデプロイ
 ```console
