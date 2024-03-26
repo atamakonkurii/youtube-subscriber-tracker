@@ -10,7 +10,14 @@ aws secretsmanager create-secret \
     --secret-string "xxx"
 
 aws secretsmanager create-secret \
-    --name YOUTUBE_CHANNEL_ID \
-    --description "YOUTUBE_CHANNEL_ID" \
+    --name SNS_TOPIC_ARN \
+    --description "SNS_TOPIC_ARN" \
     --secret-string "xxx"
 ```
+
+```
+# aws cliでのSNS emailのsubscription作成
+aws sns subscribe --topic-arn arn:aws:sns:{region}:{account_id}:{topic_name} --protocol email --notification-endpoint {email_address}
+```
+
+aws sns subscribe --topic-arn arn:aws:sns:ap-northeast-1:321462977814:youtube-subscribe-notify-topic --protocol email --notification-endpoint atamakonkurii.kazuki@gmail.com
