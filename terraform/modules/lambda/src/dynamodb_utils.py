@@ -1,4 +1,5 @@
 import boto3
+import time
 
 class DynamoDBUtils:
     def __init__(self, table_name, channel_id):
@@ -10,7 +11,8 @@ class DynamoDBUtils:
     def _put_item(self, subscriber_count):
         item = {
             'YoutubeChannelId': self.channel_id,
-            'SubscriberCount': subscriber_count
+            'SubscriberCount': subscriber_count,
+            'CreatedAt': int(time.time())
         }
         self.table.put_item(Item=item)
 

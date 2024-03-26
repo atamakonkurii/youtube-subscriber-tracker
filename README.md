@@ -10,8 +10,8 @@ aws secretsmanager create-secret \
     --secret-string "xxx"
 
 aws secretsmanager create-secret \
-    --name YOUTUBE_CHANNEL_ID \
-    --description "YOUTUBE_CHANNEL_ID" \
+    --name SNS_TOPIC_ARN \
+    --description "SNS_TOPIC_ARN" \
     --secret-string "xxx"
 ```
 
