@@ -9,6 +9,10 @@
 * AWS SNS
 * AWS CloudWatch Event
 
+### システム構成
+
+![system](https://github.com/atamakonkurii/youtube-subscriber-tracker/assets/71773200/fa08e10b-0ae5-4295-afb7-735623ed6d37)
+
 ### 利用方法
 
 ##### ⭐️aws cliでのシークレット作成
