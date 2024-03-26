@@ -4,7 +4,7 @@ import urllib.request
 from secret_manager_utils import SecretManagerUtils
 from dynamodb_utils import DynamoDBUtils
 from sns_utils import SNSUtils
-from constants import REGION, CHANNEL_ID, DYNAMODB_TABLE_NAME
+from constants import REGION, CHANNEL_ID, DYNAMODB_TABLE_NAME, YOUTUBE_API_SECRET_NAME
 
 
 def lambda_handler(event, context):
@@ -22,7 +22,7 @@ def lambda_handler(event, context):
     return __save_and_publish_subscriber(subscriber_count, previous_subscriber_count)
         
 def __get_youtube_api_key():
-    secret_manager_youtube_api = SecretManagerUtils("YOUTUBE_API_KEY", REGION)
+    secret_manager_youtube_api = SecretManagerUtils(YOUTUBE_API_SECRET_NAME, REGION)
     api_key = secret_manager_youtube_api._get_secret()
     return api_key
 
