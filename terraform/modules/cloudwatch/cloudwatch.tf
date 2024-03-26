@@ -6,7 +6,7 @@ variable "lambda_function_name" {
 variable "lambda_arn" {
   description = "Lambda ARN"
   type        = string
-  
+
 }
 
 resource "aws_cloudwatch_event_rule" "every_day" {
